@@ -5,7 +5,8 @@ import Button from '../UI/Button'
 import {useGlobalContext} from '../store/context'
 
 const Header = () => {
-  const {handleShowCart, cart} = useGlobalContext()
+  const {handleShowCart, cartUniqueItems} = useGlobalContext()
+
   return (
     <StyledHeader>
       <StyledHeaderInner>
@@ -13,7 +14,7 @@ const Header = () => {
         <nav>
           <Button buttonText='Your Cart' backgroundColor='#FF8A65' onClick={() => handleShowCart()}>
             <ShoppingCart size='32' color='white' />
-            Your Cart {cart.length > 0 && <ItemCounter> {cart.length}</ItemCounter>}
+            Your Cart {cartUniqueItems.length > 0 && <ItemCounter> {cartUniqueItems.length}</ItemCounter>}
           </Button>
         </nav>
       </StyledHeaderInner>

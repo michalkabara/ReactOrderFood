@@ -2,7 +2,6 @@ import React, {useRef} from 'react'
 import styled from 'styled-components'
 import Button from '../UI/Button'
 import {useGlobalContext} from '../store/context'
-import {useState} from 'react/cjs/react.development'
 
 const Product = ({dishName, ingridients, price, id}) => {
   const {cart, setCart} = useGlobalContext()
@@ -16,15 +15,42 @@ const Product = ({dishName, ingridients, price, id}) => {
       price: price * amount.current.value,
       amount: amount.current.value,
     }
+
     // if cart contains item with same id
     // update cart state and add 1 to amount of this item
 
-    const cartContent = [...cart, product]
-    setCart(cartContent)
-    const sameId = cartContent.filter(item => item.id != id)
+    //check if cart has item with given id
+    const existingCartItemIndex = cart.findIndex(item => item.id === id)
 
-    console.log(sameId, 'same id')
-    console.log(cart, 'cart')
+    // create variable storing that item
+    const exitingCartItem = cart[existingCartItemIndex]
+
+    // variable for updated items
+    let updatedItems
+
+    // if existing item is true
+    if (exitingCartItem) {
+      //create variable storing item
+      const updatedItem = {
+        //spreading previous values like name and price
+        ...exitingCartItem,
+        //change amount of the item
+        price: price * exitingCartItem.amount,
+        amount: +exitingCartItem.amount + +amount.current.value,
+      }
+      //then create snapshot of previous state
+      updatedItems = [...cart]
+      //get item with the same id and update it to updatedItem
+      updatedItems[existingCartItemIndex] = updatedItem
+      //update state
+      setCart(updatedItems)
+    }
+
+    // else add item to cart
+    else {
+      const cartContent = [...cart, product]
+      setCart(cartContent)
+    }
   }
 
   return (
