@@ -2,13 +2,18 @@ import styled from 'styled-components'
 import Header from './components/Header'
 import ProductList from './components/ProductList'
 import Modal from './components/Modal'
-import {useGlobalContext} from './context'
+import {useGlobalContext} from './store/context'
+import Cart from './components/Cart'
 
 function App() {
-  const {showModal} = useGlobalContext()
+  const {showCart} = useGlobalContext()
   return (
     <>
-      {showModal && <Modal />}
+      {showCart && (
+        <Modal title='Your Cart'>
+          <Cart />
+        </Modal>
+      )}
       <Header />
       <BodyContainer>
         <ProductList />

@@ -1,4 +1,4 @@
-import {useGlobalContext} from '../context'
+import {useGlobalContext} from '../store/context'
 import styled from 'styled-components'
 
 const Cart = () => {

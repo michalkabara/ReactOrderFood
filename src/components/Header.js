@@ -2,16 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import {ShoppingCart} from 'iconsax-react'
 import Button from '../UI/Button'
-import {useGlobalContext} from '../context'
+import {useGlobalContext} from '../store/context'
 
 const Header = () => {
-  const {handleShowModal, cart} = useGlobalContext()
+  const {handleShowCart, cart} = useGlobalContext()
   return (
     <StyledHeader>
       <StyledHeaderInner>
         <LogoContainer>ReactMeals</LogoContainer>
         <nav>
-          <Button buttonText='Your Cart' backgroundColor='#FF8A65' onClick={() => handleShowModal()}>
+          <Button buttonText='Your Cart' backgroundColor='#FF8A65' onClick={() => handleShowCart()}>
             <ShoppingCart size='32' color='white' />
             Your Cart {cart.length > 0 && <ItemCounter> {cart.length}</ItemCounter>}
           </Button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Button = ({children, buttonText, backgroundColor = '#FF8A65', onClick}) => {
+const Button = ({children, backgroundColor = '#FF8A65', onClick}) => {
   return (
     <StyledButton style={{backgroundColor: backgroundColor}} onClick={onClick}>
       {children}

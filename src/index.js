@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom'
 
 import './index.css'
 import App from './App'
-import {ContextProvider} from './context'
+import {ContextProvider} from './store/context'
 
 ReactDOM.render(
   <ContextProvider>

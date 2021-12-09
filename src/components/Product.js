@@ -1,7 +1,8 @@
 import React, {useRef} from 'react'
 import styled from 'styled-components'
 import Button from '../UI/Button'
-import {useGlobalContext} from '../context'
+import {useGlobalContext} from '../store/context'
+import {useState} from 'react/cjs/react.development'
 
 const Product = ({dishName, ingridients, price, id}) => {
   const {cart, setCart} = useGlobalContext()
@@ -19,13 +20,11 @@ const Product = ({dishName, ingridients, price, id}) => {
     // update cart state and add 1 to amount of this item
 
     const cartContent = [...cart, product]
-    if (cartContent.includes(item => item.id === id)) {
-      //set state to same as before but add the new amount of item
-      console.log('array contains item with id', id)
-      setCart([...cartContent, product.amount + amount.current.value])
-    } else setCart(cartContent)
+    setCart(cartContent)
+    const sameId = cartContent.filter(item => item.id != id)
 
-    console.log(cart)
+    console.log(sameId, 'same id')
+    console.log(cart, 'cart')
   }
 
   return (
@@ -38,7 +37,15 @@ const Product = ({dishName, ingridients, price, id}) => {
       <AddToCartContainer>
         <InputContainer>
           <label htmlFor='amount'>Amount</label>
-          <StyledInput id='amount ' type='number' min='1' max='10' placeholder='1' ref={amount} />
+          <StyledInput
+            id='amount '
+            type='number'
+            min='1'
+            max='10'
+            placeholder='1'
+            ref={amount}
+            defaultValue='1'
+          />
         </InputContainer>
         <Button onClick={() => addToCart(id)}>Add to Cart</Button>
       </AddToCartContainer>

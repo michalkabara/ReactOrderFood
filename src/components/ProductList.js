@@ -1,6 +1,6 @@
 import React from 'react'
 import Product from './Product'
-import {useGlobalContext} from '../context'
+import {useGlobalContext} from '../store/context'
 
 const ProductList = () => {
   const {meals} = useGlobalContext()
